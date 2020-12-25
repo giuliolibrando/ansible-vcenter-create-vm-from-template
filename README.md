@@ -2,4 +2,4 @@
 
 This Ansible playbook is meant to be executed as part of a workflow.
 
-Deploy a new VM on VMWare vCenterand configures it
+Deploy a new VM on VMWare vCenter and configures it

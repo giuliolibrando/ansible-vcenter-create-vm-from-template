@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  become: no
+  gather_facts: no
+
+  vars_files:
+    - vars/vars.yml
+    
+  tasks:
+    - name: Create VM based on User selection
+      include_tasks: ./tasks/{{ os_type }}/main.yml
+
+    - set_stats:
+        data:
+          host_name: "{{ host_ip }}"
+          host_name_name: "{{ host_name }}"
+          os_type: "{{ os_type }}"

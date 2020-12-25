@@ -1,0 +1,34 @@
+---
+- name: Clone the template
+  vmware_guest:
+      hostname: "{{ vsphere_host }}"
+      username: "{{ vsphere_username }}"
+      password: "{{ vsphere_password }}"
+      validate_certs: False
+      name: "{{ host_name }}"
+      template: #templatename
+      datacenter: "{{ datacenter_name }}"
+      folder: /{{ datacenter_name }}/vm
+      cluster: "{{ cluster_name }}"
+      datastore: "{{datastore_name}}"
+      annotation: "{{ annotation }}"
+      networks:
+      - name: "{{ network_name }}"
+        ip: "{{ host_ip }}"
+        netmask: #netmask
+        gateway: "{{ host_gateway }}"
+        type: static
+        dns_servers: #yourdnsserver
+        start_connected: true
+      customization:
+        hostname: "{{ host_name|lower }}"
+        dns_servers:
+        - "{{ host_dns1 }}"
+        - "{{ host_dns2 }}"
+      state: poweredon
+      wait_for_ip_address: yes
+  delegate_to: localhost
+ 
+- name: Pause for 1 minutes to Customize VM
+  pause:
+    minutes: 1

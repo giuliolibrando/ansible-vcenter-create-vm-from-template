@@ -1,0 +1,1 @@
+# ansible-vcenter-create-vm-from-template
